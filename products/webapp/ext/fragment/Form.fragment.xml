@@ -1,0 +1,44 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:f="sap.ui.layout.form">
+    <Dialog id="salesDialog" title="{i18n>formTitle}">
+        <content>
+            <f:SimpleForm editable="true" layout="ResponsiveGridLayout">
+                <f:content>
+                    <Label text="{i18n>formYear}" required="true"/>
+                    <ComboBox 
+                        id="cbYear"
+                        items="{path: '/VH_Years'}" 
+                        selectedKey="{form>/year}">
+                        <core:Item key="{year}" text="{year}"/>
+                    </ComboBox>
+
+                    <Label text="{i18n>formMonth}" required="true"/>
+                    <ComboBox 
+                        id="cbMonth"
+                        items="{path: '/VH_Months'}" 
+                        selectedKey="{form>/month}">
+                        <core:Item key="{code}" text="{name}"/>
+                    </ComboBox>
+
+                    <Label text="{i18n>formQuantity}" 
+                           required="true"/>
+                    <Input value="{form>/quantity}" 
+                           type="Number" 
+                           placeholder="{form>/enterAmount}"/>
+                </f:content>
+            </f:SimpleForm>
+        </content>
+        <beginButton>
+            <Button text="{i18n>save}" 
+                    type="Emphasized" 
+                    press="onSaveSales"/>
+        </beginButton>
+        <endButton>
+            <Button text="{i18n>cancel}" 
+                    type="Reject"
+                    press="onCloseSales"/>
+        </endButton>
+    </Dialog>
+</core:FragmentDefinition>

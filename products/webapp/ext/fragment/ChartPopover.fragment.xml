@@ -1,0 +1,35 @@
+<core:FragmentDefinition
+                      xmlns="sap.m" 
+					  xmlns:core="sap.ui.core">
+<Popover title="{i18n>saleTitle}"
+         placement="Top"
+         contentWidth="15rem">
+        <content>
+            <VBox class="sapUiSmallMargin" >
+                <HBox>
+                    <Label text="{i18n>year}" design="Bold" class="sapUiSmallMarginEnd"/>
+                     <Text text="{popoverModel>/year}"/>
+
+                </HBox>
+                <HBox>
+                    <Label text="{i18n>month}" design="Bold" class="sapUiSmallMarginEnd"/>
+                    <Text text="{popoverModel>/month}"/>
+
+                </HBox>
+                <HBox>
+                    <Label text="{i18n>quantity}" design="Bold" class="sapUiSmallMarginEnd"/>
+                    <Text text="{popoverModel>/quantity}"/>
+
+                </HBox>
+            </VBox>
+        </content>
+        <footer>
+        <Toolbar>
+            <ToolbarSpacer />
+            <Button text="{i18n>detail}" press="onNavToDetails" type="Emphasized" />
+        </Toolbar>
+    </footer>
+    </Popover>
+
+
+</core:FragmentDefinition>

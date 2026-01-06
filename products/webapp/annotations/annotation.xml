@@ -1,0 +1,121 @@
+<edmx:Edmx xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx" Version="4.0">
+    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/Analytics.xml">
+        <edmx:Include Namespace="com.sap.vocabularies.Analytics.v1" Alias="Analytics" />
+    </edmx:Reference>
+    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/UI.xml">
+        <edmx:Include Namespace="com.sap.vocabularies.UI.v1" Alias="UI" />
+    </edmx:Reference>
+    <edmx:Reference Uri="/odata/v4/logali-group/$metadata">
+        <edmx:Include Namespace="LogaliGroup" />
+    </edmx:Reference>
+    <edmx:DataServices>
+        <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="local">
+            <Annotations Target="LogaliGroup.Products">
+                <Annotation Term="UI.Facets">
+                    <Collection>
+                        <Record Type="UI.CollectionFacet">
+                            <PropertyValue Property="Facets">
+                                <Collection>
+                                    <Record Type="UI.ReferenceFacet">
+                                        <PropertyValue Property="Target" AnnotationPath="supplier/@UI.FieldGroup#Supplier" />
+                                        <PropertyValue Property="Label" String="Information" />
+                                        <PropertyValue Property="ID" String="supplier" />
+                                    </Record>
+                                    <Record Type="UI.ReferenceFacet">
+                                        <PropertyValue Property="Target" AnnotationPath="supplier/contact/@UI.FieldGroup#Contact" />
+                                        <PropertyValue Property="Label" String="Contact Person" />
+                                        <PropertyValue Property="ID" String="contact" />
+                                    </Record>
+                                </Collection>
+                            </PropertyValue>
+                            <PropertyValue Property="Label" String="Supplier Information" />
+                        </Record>
+                        <Record Type="UI.ReferenceFacet">
+                            <PropertyValue Property="Target" AnnotationPath="detail/@UI.FieldGroup" />
+                            <PropertyValue Property="Label" String="Product Information" />
+                            <PropertyValue Property="ID" String="detail" />
+                        </Record>
+                        <Record Type="UI.ReferenceFacet">
+                            <PropertyValue Property="Target" AnnotationPath="toReviews/@UI.LineItem" />
+                            <PropertyValue Property="Label" String="Reviews" />
+                            <PropertyValue Property="ID" String="toReviews" />
+                        </Record>
+                        <Record Type="UI.ReferenceFacet">
+                            <PropertyValue Property="Target" AnnotationPath="toInventories/@UI.LineItem" />
+                            <PropertyValue Property="Label" String="Inventory Information" />
+                            <PropertyValue Property="ID" String="toInventories" />
+                        </Record>
+                        <Record Type="UI.ReferenceFacet">
+                            <PropertyValue Property="Label" String="Sales"/>
+                            <PropertyValue Property="ID" String="Sales"/>
+                            <PropertyValue Property="Target" AnnotationPath="toSales/@UI.Chart#chartSection2"/>
+                            <Annotation Term="UI.Hidden"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="LogaliGroup.Sales">
+                <Annotation Term="UI.Chart" Qualifier="chartSection">
+                    <Record Type="UI.ChartDefinitionType">
+                        <PropertyValue Property="ChartType" EnumMember="UI.ChartType/Bar" />
+                        <PropertyValue Property="Dimensions">
+                            <Collection>
+                                <PropertyPath>month</PropertyPath>
+                            </Collection>
+                        </PropertyValue>
+                        <PropertyValue Property="DynamicMeasures">
+                            <Collection>
+                                <AnnotationPath>@Analytics.AggregatedProperty#sum</AnnotationPath>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.Chart" Qualifier="chartMacro">
+                    <Record Type="UI.ChartDefinitionType">
+                        <PropertyValue Property="ChartType" EnumMember="UI.ChartType/Bar" />
+                        <PropertyValue Property="Dimensions">
+                            <Collection>
+                                <PropertyPath>month</PropertyPath>
+                            </Collection>
+                        </PropertyValue>
+                        <PropertyValue Property="DynamicMeasures">
+                            <Collection>
+                                <AnnotationPath>@Analytics.AggregatedProperty#sum</AnnotationPath>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.Chart" Qualifier="chartSection1">
+                    <Record Type="UI.ChartDefinitionType">
+                        <PropertyValue Property="ChartType" EnumMember="UI.ChartType/Line"/>
+                        <PropertyValue Property="Dimensions">
+                            <Collection>
+                                <PropertyPath>year</PropertyPath>
+                            </Collection>
+                        </PropertyValue>
+                        <PropertyValue Property="DynamicMeasures">
+                            <Collection>
+                                <AnnotationPath>@Analytics.AggregatedProperty#sum</AnnotationPath>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.Chart" Qualifier="chartSection2">
+                    <Record Type="UI.ChartDefinitionType">
+                        <PropertyValue Property="ChartType" EnumMember="UI.ChartType/Line"/>
+                        <PropertyValue Property="Dimensions">
+                            <Collection>
+                                <PropertyPath>month</PropertyPath>
+                            </Collection>
+                        </PropertyValue>
+                        <PropertyValue Property="DynamicMeasures">
+                            <Collection>
+                                <AnnotationPath>@Analytics.AggregatedProperty#sum</AnnotationPath>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>

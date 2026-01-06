@@ -1,0 +1,256 @@
+{
+  "_version": "1.59.0",
+  "sap.app": {
+    "id": "com.ya.products",
+    "type": "application",
+    "i18n": "i18n/i18n.properties",
+    "applicationVersion": {
+      "version": "0.0.1"
+    },
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "resources": "resources.json",
+    "sourceTemplate": {
+      "id": "@sap/generator-fiori:lrop",
+      "version": "1.20.0",
+      "toolsId": "d6e03993-a1ca-40bb-bc2f-62a59cb99e77"
+    },
+    "dataSources": {
+      "annotation": {
+        "type": "ODataAnnotation",
+        "uri": "annotations/annotation.xml",
+        "settings": {
+          "localUri": "annotations/annotation.xml"
+        }
+      },
+      "mainService": {
+        "uri": "/odata/v4/logali-group/",
+        "type": "OData",
+        "settings": {
+          "annotations": [
+            "annotation"
+          ],
+          "localUri": "localService/mainService/metadata.xml",
+          "odataVersion": "4.0"
+        }
+      }
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "icons": {
+      "icon": "",
+      "favIcon": "",
+      "phone": "",
+      "phone@2": "",
+      "tablet": "",
+      "tablet@2": ""
+    },
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },
+  "sap.ui5": {
+    "flexEnabled": false,
+    "dependencies": {
+      "minUI5Version": "1.120.0",
+      "libs": {
+        "sap.m": {},
+        "sap.ui.core": {},
+        "sap.fe.macros": {},
+        "sap.fe.templates": {},
+        "sap.fe.core": {}
+      }
+    },
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "com.ya.products.i18n.i18n"
+        }
+      },
+      "": {
+        "dataSource": "mainService",
+        "preload": true,
+        "settings": {
+          "operationMode": "Server",
+          "autoExpandSelect": true,
+          "earlyRequests": true,
+          "groupId": "$direct",
+          "synchronizationMode": "None",
+          "updateGroupId": "$direct"
+        }
+      },
+      "@i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "uri": "i18n/i18n.properties"
+      }
+    },
+    "resources": {
+      "css": []
+    },
+    "routing": {
+      "config": {},
+      "routes": [
+        {
+          "pattern": ":?query:",
+          "name": "ProductsList",
+          "target": "ProductsList"
+        },
+        {
+          "pattern": "Products({key}):?query:",
+          "name": "ProductsObjectPage",
+          "target": "ProductsObjectPage"
+        },
+        {
+          "name": "ProductsDetailsPage",
+          "pattern": "Products({ProductsKey}):?query:",
+          "target": "ProductsDetailsPage"
+        },
+        {
+          "name": "SalesReviewPage",
+          "pattern": "Products(ID={key},IsActiveEntity={boolean1})/toSales(product_ID={toSalesKey},IsActiveEntity={boolean2},month={month},year={year}):?query:",
+          "target": "SalesReviewPage"
+        }
+      ],
+      "targets": {
+        "ProductsListMain": {
+          "type": "Component",
+          "id": "ProductsListMain",
+          "name": "sap.fe.templates.ListReport",
+          "options": {
+            "settings": {
+              "viewName": "com.ya.products.ext.main.Main",
+              "contextPath": "/Products",
+              "entitySet": "Products",
+              "navigation": {
+                "Products": {
+                  "detail": {
+                    "route": "ProductsDetailsPage"
+                  }
+                }
+              },
+              "controlConfiguration": {
+                "ProductsTable": {
+                  "tableSettings": {
+                    "type": "ResponsiveTable",
+                    "header": "{i18n>appTitle}",
+                    "showRowCount": true
+                  }
+                }
+              }
+            }
+          }
+        },
+        "ProductsList": {
+          "type": "Component",
+          "id": "ProductsList",
+          "name": "sap.fe.templates.ListReport",
+          "options": {
+            "settings": {
+              "contextPath": "/Products",
+              "variantManagement": "Page",
+              "navigation": {
+                "Products": {
+                  "detail": {
+                    "route": "ProductsObjectPage"
+                  }
+                }
+              },
+              "controlConfiguration": {
+                "@com.sap.vocabularies.UI.v1.LineItem": {
+                  "tableSettings": {
+                    "type": "ResponsiveTable"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "ProductsObjectPage": {
+          "type": "Component",
+          "id": "ProductsObjectPage",
+          "name": "sap.fe.templates.ObjectPage",
+          "options": {
+            "settings": {
+              "editableHeaderContent": false,
+              "contextPath": "/Products",
+              "navigation": {
+                "toSales": {
+                  "detail": {
+                    "route": "SalesReviewPage"
+                  }
+                }
+              },
+              "content": {
+                "body": {
+                  "sections": {
+                    "ChartSection": {
+                      "template": "com.ya.products.ext.fragment.ChartSection",
+                      "position": {
+                        "placement": "After",
+                        "anchor": "Sales"
+                      },
+                      "title": "Sales",
+                      "actions": {
+                        "addSalesAction": {
+                          "press": ".extension.com.ya.products.ext.controller.ProductObjectPage.onOpenSalesDialog",
+                          "visible": true,
+                          "enabled": true,
+                          "text": "New Sale"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "ProductsDetailsPage": {
+          "type": "Component",
+          "id": "ProductsDetailsPage",
+          "name": "sap.fe.core.fpm",
+          "options": {
+            "settings": {
+              "navigation": {},
+              "contextPath": "/Products",
+              "viewName": "com.ya.products.ext.view.Details"
+            }
+          }
+        },
+        "SalesReviewPage": {
+          "type": "Component",
+          "id": "SalesReviewPage",
+          "name": "sap.fe.core.fpm",
+          "options": {
+            "settings": {
+              "navigation": {},
+              "contextPath": "/Products/toSales",
+              "viewName": "com.ya.products.ext.view.Review"
+            }
+          }
+        }
+      }
+    },
+    "extends": {
+      "extensions": {
+        "sap.ui.controllerExtensions": {
+          "sap.fe.templates.ObjectPage.ObjectPageController": {
+            "controllerName": "com.ya.products.ext.controller.ProductObjectPage"
+          }
+        }
+      }
+    }
+  },
+  "sap.fiori": {
+    "registrationIds": [],
+    "archeType": "transactional"
+  }
+}

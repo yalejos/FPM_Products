@@ -1,0 +1,1918 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="4.0" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+    <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Aggregation.V1.xml">
+        <edmx:Include Alias="Aggregation" Namespace="Org.OData.Aggregation.V1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/Analytics.xml">
+        <edmx:Include Alias="Analytics" Namespace="com.sap.vocabularies.Analytics.v1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Capabilities.V1.xml">
+        <edmx:Include Alias="Capabilities" Namespace="Org.OData.Capabilities.V1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/Common.xml">
+        <edmx:Include Alias="Common" Namespace="com.sap.vocabularies.Common.v1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Core.V1.xml">
+        <edmx:Include Alias="Core" Namespace="Org.OData.Core.V1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/HTML5.xml">
+        <edmx:Include Alias="HTML5" Namespace="com.sap.vocabularies.HTML5.v1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Measures.V1.xml">
+        <edmx:Include Alias="Measures" Namespace="Org.OData.Measures.V1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/UI.xml">
+        <edmx:Include Alias="UI" Namespace="com.sap.vocabularies.UI.v1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Validation.V1.xml">
+        <edmx:Include Alias="Validation" Namespace="Org.OData.Validation.V1"/>
+    </edmx:Reference>
+    <edmx:DataServices>
+        <Schema Namespace="LogaliGroup" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+            <Annotation Term="Core.Links">
+                <Collection>
+                    <Record>
+                        <PropertyValue Property="rel" String="author"/>
+                        <PropertyValue Property="href" String="https://cap.cloud.sap"/>
+                    </Record>
+                </Collection>
+            </Annotation>
+            <EntityContainer Name="EntityContainer">
+                <EntitySet Name="Products" EntityType="LogaliGroup.Products">
+                    <NavigationPropertyBinding Path="category" Target="VH_Categories"/>
+                    <NavigationPropertyBinding Path="subCategory" Target="VH_SubCategories"/>
+                    <NavigationPropertyBinding Path="statu" Target="Status"/>
+                    <NavigationPropertyBinding Path="currency" Target="Currencies"/>
+                    <NavigationPropertyBinding Path="detail" Target="ProductDetails"/>
+                    <NavigationPropertyBinding Path="supplier" Target="Suppliers"/>
+                    <NavigationPropertyBinding Path="toReviews" Target="Reviews"/>
+                    <NavigationPropertyBinding Path="toInventories" Target="Inventories"/>
+                    <NavigationPropertyBinding Path="toSales" Target="Sales"/>
+                    <NavigationPropertyBinding Path="SiblingEntity" Target="Products"/>
+                </EntitySet>
+                <EntitySet Name="ProductDetails" EntityType="LogaliGroup.ProductDetails">
+                    <NavigationPropertyBinding Path="SiblingEntity" Target="ProductDetails"/>
+                </EntitySet>
+                <EntitySet Name="Suppliers" EntityType="LogaliGroup.Suppliers">
+                    <NavigationPropertyBinding Path="contact" Target="Contacts"/>
+                </EntitySet>
+                <EntitySet Name="Contacts" EntityType="LogaliGroup.Contacts"/>
+                <EntitySet Name="Reviews" EntityType="LogaliGroup.Reviews">
+                    <NavigationPropertyBinding Path="product" Target="Products"/>
+                </EntitySet>
+                <EntitySet Name="Inventories" EntityType="LogaliGroup.Inventories">
+                    <NavigationPropertyBinding Path="department" Target="VH_Departments"/>
+                    <NavigationPropertyBinding Path="product" Target="Products"/>
+                    <NavigationPropertyBinding Path="SiblingEntity" Target="Inventories"/>
+                </EntitySet>
+                <EntitySet Name="Sales" EntityType="LogaliGroup.Sales">
+                    <NavigationPropertyBinding Path="product" Target="Products"/>
+                    <NavigationPropertyBinding Path="SiblingEntity" Target="Sales"/>
+                </EntitySet>
+                <EntitySet Name="Status" EntityType="LogaliGroup.Status">
+                    <NavigationPropertyBinding Path="texts" Target="Status_texts"/>
+                    <NavigationPropertyBinding Path="localized" Target="Status_texts"/>
+                </EntitySet>
+                <EntitySet Name="VH_Categories" EntityType="LogaliGroup.VH_Categories">
+                    <NavigationPropertyBinding Path="toSubCategories" Target="VH_SubCategories"/>
+                </EntitySet>
+                <EntitySet Name="VH_SubCategories" EntityType="LogaliGroup.VH_SubCategories">
+                    <NavigationPropertyBinding Path="category" Target="VH_Categories"/>
+                </EntitySet>
+                <EntitySet Name="VH_Departments" EntityType="LogaliGroup.VH_Departments"/>
+                <EntitySet Name="VH_Options" EntityType="LogaliGroup.VH_Options">
+                    <NavigationPropertyBinding Path="texts" Target="VH_Options_texts"/>
+                    <NavigationPropertyBinding Path="localized" Target="VH_Options_texts"/>
+                </EntitySet>
+                <EntitySet Name="VH_Years" EntityType="LogaliGroup.VH_Years"/>
+                <EntitySet Name="VH_Months" EntityType="LogaliGroup.VH_Months">
+                    <NavigationPropertyBinding Path="texts" Target="VH_Months_texts"/>
+                    <NavigationPropertyBinding Path="localized" Target="VH_Months_texts"/>
+                </EntitySet>
+                <EntitySet Name="Currencies" EntityType="LogaliGroup.Currencies">
+                    <NavigationPropertyBinding Path="texts" Target="Currencies_texts"/>
+                    <NavigationPropertyBinding Path="localized" Target="Currencies_texts"/>
+                </EntitySet>
+                <EntitySet Name="Status_texts" EntityType="LogaliGroup.Status_texts"/>
+                <EntitySet Name="VH_Options_texts" EntityType="LogaliGroup.VH_Options_texts"/>
+                <EntitySet Name="VH_Months_texts" EntityType="LogaliGroup.VH_Months_texts"/>
+                <EntitySet Name="Currencies_texts" EntityType="LogaliGroup.Currencies_texts"/>
+                <ActionImport Name="setSales" Action="LogaliGroup.setSales"/>
+                <ActionImport Name="getQuantitySales" Action="LogaliGroup.getQuantitySales"/>
+            </EntityContainer>
+            <EntityType Name="Products">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                    <PropertyRef Name="IsActiveEntity"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="createdAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="createdBy" Type="Edm.String" MaxLength="255"/>
+                <Property Name="modifiedAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="modifiedBy" Type="Edm.String" MaxLength="255"/>
+                <Property Name="product" Type="Edm.String" MaxLength="8"/>
+                <Property Name="productName" Type="Edm.String" MaxLength="80"/>
+                <Property Name="image" Type="Edm.Stream"/>
+                <Property Name="imageType" Type="Edm.String"/>
+                <Property Name="description" Type="Edm.String"/>
+                <NavigationProperty Name="category" Type="LogaliGroup.VH_Categories">
+                    <ReferentialConstraint Property="category_ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+                <Property Name="category_ID" Type="Edm.Guid"/>
+                <NavigationProperty Name="subCategory" Type="LogaliGroup.VH_SubCategories">
+                    <ReferentialConstraint Property="subCategory_ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+                <Property Name="subCategory_ID" Type="Edm.Guid"/>
+                <NavigationProperty Name="statu" Type="LogaliGroup.Status">
+                    <ReferentialConstraint Property="statu_code" ReferencedProperty="code"/>
+                </NavigationProperty>
+                <Property Name="statu_code" Type="Edm.String" MaxLength="20"/>
+                <Property Name="price" Type="Edm.Decimal" Precision="8" Scale="2"/>
+                <Property Name="rating" Type="Edm.Decimal" Precision="3" Scale="2"/>
+                <NavigationProperty Name="currency" Type="LogaliGroup.Currencies">
+                    <ReferentialConstraint Property="currency_code" ReferencedProperty="code"/>
+                </NavigationProperty>
+                <Property Name="currency_code" Type="Edm.String" MaxLength="3"/>
+                <NavigationProperty Name="detail" Type="LogaliGroup.ProductDetails">
+                    <OnDelete Action="Cascade"/>
+                    <ReferentialConstraint Property="detail_ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+                <Property Name="detail_ID" Type="Edm.Guid"/>
+                <NavigationProperty Name="supplier" Type="LogaliGroup.Suppliers">
+                    <ReferentialConstraint Property="supplier_ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+                <Property Name="supplier_ID" Type="Edm.Guid"/>
+                <NavigationProperty Name="toReviews" Type="Collection(LogaliGroup.Reviews)" Partner="product"/>
+                <NavigationProperty Name="toInventories" Type="Collection(LogaliGroup.Inventories)" Partner="product">
+                    <OnDelete Action="Cascade"/>
+                </NavigationProperty>
+                <NavigationProperty Name="toSales" Type="Collection(LogaliGroup.Sales)" Partner="product">
+                    <OnDelete Action="Cascade"/>
+                </NavigationProperty>
+                <Property Name="IsActiveEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="true"/>
+                <Property Name="HasActiveEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="false"/>
+                <Property Name="HasDraftEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="false"/>
+                <NavigationProperty Name="DraftAdministrativeData" Type="LogaliGroup.DraftAdministrativeData" ContainsTarget="true"/>
+                <NavigationProperty Name="SiblingEntity" Type="LogaliGroup.Products"/>
+            </EntityType>
+            <EntityType Name="ProductDetails">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                    <PropertyRef Name="IsActiveEntity"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="baseUnit" Type="Edm.String" DefaultValue="EA"/>
+                <Property Name="width" Type="Edm.Decimal" Precision="6" Scale="3"/>
+                <Property Name="height" Type="Edm.Decimal" Precision="6" Scale="3"/>
+                <Property Name="depth" Type="Edm.Decimal" Precision="6" Scale="3"/>
+                <Property Name="weight" Type="Edm.Decimal" Precision="6" Scale="3"/>
+                <Property Name="unitVolume" Type="Edm.String" DefaultValue="CM"/>
+                <Property Name="unitWeight" Type="Edm.String" DefaultValue="KG"/>
+                <Property Name="IsActiveEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="true"/>
+                <Property Name="HasActiveEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="false"/>
+                <Property Name="HasDraftEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="false"/>
+                <NavigationProperty Name="DraftAdministrativeData" Type="LogaliGroup.DraftAdministrativeData" ContainsTarget="true"/>
+                <NavigationProperty Name="SiblingEntity" Type="LogaliGroup.ProductDetails"/>
+            </EntityType>
+            <EntityType Name="Suppliers">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="supplier" Type="Edm.String" MaxLength="9"/>
+                <Property Name="supplierName" Type="Edm.String" MaxLength="40"/>
+                <Property Name="webAddress" Type="Edm.String" MaxLength="250"/>
+                <NavigationProperty Name="contact" Type="LogaliGroup.Contacts">
+                    <ReferentialConstraint Property="contact_ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+                <Property Name="contact_ID" Type="Edm.Guid"/>
+            </EntityType>
+            <EntityType Name="Contacts">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="fullName" Type="Edm.String" MaxLength="40"/>
+                <Property Name="email" Type="Edm.String" MaxLength="80"/>
+                <Property Name="phoneNumber" Type="Edm.String" MaxLength="14"/>
+            </EntityType>
+            <EntityType Name="Reviews">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="rating" Type="Edm.Decimal" Precision="3" Scale="2"/>
+                <Property Name="date" Type="Edm.Date"/>
+                <Property Name="user" Type="Edm.String" MaxLength="20"/>
+                <Property Name="reviewText" Type="Edm.String"/>
+                <NavigationProperty Name="product" Type="LogaliGroup.Products" Partner="toReviews">
+                    <ReferentialConstraint Property="product_ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+                <Property Name="product_ID" Type="Edm.Guid"/>
+            </EntityType>
+            <EntityType Name="Inventories">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                    <PropertyRef Name="IsActiveEntity"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="stockNumber" Type="Edm.String" MaxLength="11"/>
+                <NavigationProperty Name="department" Type="LogaliGroup.VH_Departments">
+                    <ReferentialConstraint Property="department_ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+                <Property Name="department_ID" Type="Edm.Guid"/>
+                <Property Name="min" Type="Edm.Int32"/>
+                <Property Name="max" Type="Edm.Int32"/>
+                <Property Name="target" Type="Edm.Int32"/>
+                <Property Name="quantity" Type="Edm.Decimal" Precision="6" Scale="3"/>
+                <Property Name="baseUnit" Type="Edm.String" DefaultValue="EA"/>
+                <NavigationProperty Name="product" Type="LogaliGroup.Products" Partner="toInventories">
+                    <ReferentialConstraint Property="product_ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+                <Property Name="product_ID" Type="Edm.Guid"/>
+                <Property Name="IsActiveEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="true"/>
+                <Property Name="HasActiveEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="false"/>
+                <Property Name="HasDraftEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="false"/>
+                <NavigationProperty Name="DraftAdministrativeData" Type="LogaliGroup.DraftAdministrativeData" ContainsTarget="true"/>
+                <NavigationProperty Name="SiblingEntity" Type="LogaliGroup.Inventories"/>
+            </EntityType>
+            <EntityType Name="Sales">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                    <PropertyRef Name="IsActiveEntity"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="monthCode" Type="Edm.String" MaxLength="2"/>
+                <Property Name="month" Type="Edm.String" MaxLength="20"/>
+                <Property Name="year" Type="Edm.String" MaxLength="4"/>
+                <Property Name="quantitySales" Type="Edm.Int32"/>
+                <NavigationProperty Name="product" Type="LogaliGroup.Products" Partner="toSales">
+                    <ReferentialConstraint Property="product_ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+                <Property Name="product_ID" Type="Edm.Guid"/>
+                <Property Name="IsActiveEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="true"/>
+                <Property Name="HasActiveEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="false"/>
+                <Property Name="HasDraftEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="false"/>
+                <NavigationProperty Name="DraftAdministrativeData" Type="LogaliGroup.DraftAdministrativeData" ContainsTarget="true"/>
+                <NavigationProperty Name="SiblingEntity" Type="LogaliGroup.Sales"/>
+            </EntityType>
+            <EntityType Name="Status">
+                <Key>
+                    <PropertyRef Name="code"/>
+                </Key>
+                <Property Name="name" Type="Edm.String" MaxLength="255"/>
+                <Property Name="descr" Type="Edm.String" MaxLength="1000"/>
+                <Property Name="code" Type="Edm.String" MaxLength="20" Nullable="false"/>
+                <Property Name="criticality" Type="Edm.Int32"/>
+                <NavigationProperty Name="texts" Type="Collection(LogaliGroup.Status_texts)">
+                    <OnDelete Action="Cascade"/>
+                </NavigationProperty>
+                <NavigationProperty Name="localized" Type="LogaliGroup.Status_texts">
+                    <ReferentialConstraint Property="code" ReferencedProperty="code"/>
+                </NavigationProperty>
+            </EntityType>
+            <EntityType Name="VH_Categories">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="category" Type="Edm.String" MaxLength="80"/>
+                <NavigationProperty Name="toSubCategories" Type="Collection(LogaliGroup.VH_SubCategories)" Partner="category"/>
+            </EntityType>
+            <EntityType Name="VH_SubCategories">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="subCategory" Type="Edm.String" MaxLength="80"/>
+                <NavigationProperty Name="category" Type="LogaliGroup.VH_Categories" Partner="toSubCategories">
+                    <ReferentialConstraint Property="category_ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+                <Property Name="category_ID" Type="Edm.Guid"/>
+            </EntityType>
+            <EntityType Name="VH_Departments">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="department" Type="Edm.String" MaxLength="40"/>
+            </EntityType>
+            <EntityType Name="VH_Options">
+                <Key>
+                    <PropertyRef Name="code"/>
+                </Key>
+                <Property Name="name" Type="Edm.String" MaxLength="255"/>
+                <Property Name="descr" Type="Edm.String" MaxLength="1000"/>
+                <Property Name="code" Type="Edm.String" MaxLength="10" Nullable="false"/>
+                <NavigationProperty Name="texts" Type="Collection(LogaliGroup.VH_Options_texts)">
+                    <OnDelete Action="Cascade"/>
+                </NavigationProperty>
+                <NavigationProperty Name="localized" Type="LogaliGroup.VH_Options_texts">
+                    <ReferentialConstraint Property="code" ReferencedProperty="code"/>
+                </NavigationProperty>
+            </EntityType>
+            <EntityType Name="VH_Years">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="year" Type="Edm.String" MaxLength="4"/>
+            </EntityType>
+            <EntityType Name="VH_Months">
+                <Key>
+                    <PropertyRef Name="code"/>
+                </Key>
+                <Property Name="name" Type="Edm.String" MaxLength="255"/>
+                <Property Name="descr" Type="Edm.String" MaxLength="1000"/>
+                <Property Name="code" Type="Edm.String" MaxLength="2" Nullable="false"/>
+                <NavigationProperty Name="texts" Type="Collection(LogaliGroup.VH_Months_texts)">
+                    <OnDelete Action="Cascade"/>
+                </NavigationProperty>
+                <NavigationProperty Name="localized" Type="LogaliGroup.VH_Months_texts">
+                    <ReferentialConstraint Property="code" ReferencedProperty="code"/>
+                </NavigationProperty>
+            </EntityType>
+            <EntityType Name="Currencies">
+                <Key>
+                    <PropertyRef Name="code"/>
+                </Key>
+                <Property Name="name" Type="Edm.String" MaxLength="255"/>
+                <Property Name="descr" Type="Edm.String" MaxLength="1000"/>
+                <Property Name="code" Type="Edm.String" MaxLength="3" Nullable="false"/>
+                <Property Name="symbol" Type="Edm.String" MaxLength="5"/>
+                <Property Name="minorUnit" Type="Edm.Int16"/>
+                <NavigationProperty Name="texts" Type="Collection(LogaliGroup.Currencies_texts)">
+                    <OnDelete Action="Cascade"/>
+                </NavigationProperty>
+                <NavigationProperty Name="localized" Type="LogaliGroup.Currencies_texts">
+                    <ReferentialConstraint Property="code" ReferencedProperty="code"/>
+                </NavigationProperty>
+            </EntityType>
+            <EntityType Name="DraftAdministrativeData">
+                <Key>
+                    <PropertyRef Name="DraftUUID"/>
+                </Key>
+                <Property Name="DraftUUID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="CreationDateTime" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="CreatedByUser" Type="Edm.String" MaxLength="256"/>
+                <Property Name="DraftIsCreatedByMe" Type="Edm.Boolean"/>
+                <Property Name="LastChangeDateTime" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="LastChangedByUser" Type="Edm.String" MaxLength="256"/>
+                <Property Name="InProcessByUser" Type="Edm.String" MaxLength="256"/>
+                <Property Name="DraftIsProcessedByMe" Type="Edm.Boolean"/>
+            </EntityType>
+            <EntityType Name="Status_texts">
+                <Key>
+                    <PropertyRef Name="locale"/>
+                    <PropertyRef Name="code"/>
+                </Key>
+                <Property Name="locale" Type="Edm.String" MaxLength="14" Nullable="false"/>
+                <Property Name="name" Type="Edm.String" MaxLength="255"/>
+                <Property Name="descr" Type="Edm.String" MaxLength="1000"/>
+                <Property Name="code" Type="Edm.String" MaxLength="20" Nullable="false"/>
+            </EntityType>
+            <EntityType Name="VH_Options_texts">
+                <Key>
+                    <PropertyRef Name="locale"/>
+                    <PropertyRef Name="code"/>
+                </Key>
+                <Property Name="locale" Type="Edm.String" MaxLength="14" Nullable="false"/>
+                <Property Name="name" Type="Edm.String" MaxLength="255"/>
+                <Property Name="descr" Type="Edm.String" MaxLength="1000"/>
+                <Property Name="code" Type="Edm.String" MaxLength="10" Nullable="false"/>
+            </EntityType>
+            <EntityType Name="VH_Months_texts">
+                <Key>
+                    <PropertyRef Name="locale"/>
+                    <PropertyRef Name="code"/>
+                </Key>
+                <Property Name="locale" Type="Edm.String" MaxLength="14" Nullable="false"/>
+                <Property Name="name" Type="Edm.String" MaxLength="255"/>
+                <Property Name="descr" Type="Edm.String" MaxLength="1000"/>
+                <Property Name="code" Type="Edm.String" MaxLength="2" Nullable="false"/>
+            </EntityType>
+            <EntityType Name="Currencies_texts">
+                <Key>
+                    <PropertyRef Name="locale"/>
+                    <PropertyRef Name="code"/>
+                </Key>
+                <Property Name="locale" Type="Edm.String" MaxLength="14" Nullable="false"/>
+                <Property Name="name" Type="Edm.String" MaxLength="255"/>
+                <Property Name="descr" Type="Edm.String" MaxLength="1000"/>
+                <Property Name="code" Type="Edm.String" MaxLength="3" Nullable="false"/>
+            </EntityType>
+            <ComplexType Name="dialog">
+                <Property Name="option" Type="Edm.String" MaxLength="10"/>
+                <Property Name="amount" Type="Edm.Int32"/>
+            </ComplexType>
+            <ComplexType Name="sales">
+                <Property Name="result" Type="Collection(LogaliGroup.sales_result)" Nullable="true"/>
+                <Property Name="sum" Type="Edm.Decimal" Precision="6" Scale="3"/>
+            </ComplexType>
+            <ComplexType Name="sales_result">
+                <Property Name="id" Type="Edm.Guid"/>
+                <Property Name="year" Type="Edm.String" MaxLength="4"/>
+                <Property Name="month" Type="Edm.String" MaxLength="20"/>
+                <Property Name="monthCode" Type="Edm.String" MaxLength="2"/>
+                <Property Name="quantitySales" Type="Edm.Decimal" Precision="6" Scale="3"/>
+            </ComplexType>
+            <Action Name="draftPrepare" IsBound="true" EntitySetPath="in">
+                <Parameter Name="in" Type="LogaliGroup.Products"/>
+                <Parameter Name="SideEffectsQualifier" Type="Edm.String"/>
+                <ReturnType Type="LogaliGroup.Products"/>
+            </Action>
+            <Action Name="draftPrepare" IsBound="true" EntitySetPath="in">
+                <Parameter Name="in" Type="LogaliGroup.ProductDetails"/>
+                <Parameter Name="SideEffectsQualifier" Type="Edm.String"/>
+                <ReturnType Type="LogaliGroup.ProductDetails"/>
+            </Action>
+            <Action Name="draftPrepare" IsBound="true" EntitySetPath="in">
+                <Parameter Name="in" Type="LogaliGroup.Inventories"/>
+                <Parameter Name="SideEffectsQualifier" Type="Edm.String"/>
+                <ReturnType Type="LogaliGroup.Inventories"/>
+            </Action>
+            <Action Name="draftPrepare" IsBound="true" EntitySetPath="in">
+                <Parameter Name="in" Type="LogaliGroup.Sales"/>
+                <Parameter Name="SideEffectsQualifier" Type="Edm.String"/>
+                <ReturnType Type="LogaliGroup.Sales"/>
+            </Action>
+            <Action Name="draftActivate" IsBound="true" EntitySetPath="in">
+                <Parameter Name="in" Type="LogaliGroup.Products"/>
+                <ReturnType Type="LogaliGroup.Products"/>
+            </Action>
+            <Action Name="draftEdit" IsBound="true" EntitySetPath="in">
+                <Parameter Name="in" Type="LogaliGroup.Products"/>
+                <Parameter Name="PreserveChanges" Type="Edm.Boolean"/>
+                <ReturnType Type="LogaliGroup.Products"/>
+            </Action>
+            <Action Name="setStock" IsBound="true">
+                <Parameter Name="in" Type="LogaliGroup.Inventories"/>
+                <Parameter Name="option" Type="Edm.String" MaxLength="10"/>
+                <Parameter Name="amount" Type="Edm.Int32"/>
+            </Action>
+            <Action Name="setSales" IsBound="false">
+                <Parameter Name="id" Type="Edm.Guid"/>
+                <Parameter Name="year" Type="Edm.String" MaxLength="4"/>
+                <Parameter Name="month" Type="Edm.String" MaxLength="2"/>
+                <Parameter Name="quantity" Type="Edm.Int32"/>
+                <ReturnType Type="Edm.String"/>
+            </Action>
+            <Action Name="getQuantitySales" IsBound="false">
+                <Parameter Name="id" Type="Edm.Guid"/>
+                <Parameter Name="year" Type="Edm.String" MaxLength="4"/>
+                <Parameter Name="month" Type="Edm.String" MaxLength="20"/>
+                <ReturnType Type="LogaliGroup.sales"/>
+            </Action>
+            <Annotations Target="LogaliGroup.dialog/option">
+                <Annotation Term="Common.Text" Path="option">
+                    <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextOnly"/>
+                </Annotation>
+                <Annotation Term="Common.ValueList">
+                    <Record Type="Common.ValueListType">
+                        <PropertyValue Property="CollectionPath" String="VH_Options"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="option"/>
+                                    <PropertyValue Property="ValueListProperty" String="code"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="name"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Common.Label" String="Option"/>
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+            </Annotations>
+            <Annotations Target="LogaliGroup.dialog/amount">
+                <Annotation Term="Common.Label" String="Amount"/>
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+            </Annotations>
+            <Annotations Target="LogaliGroup.setSales()">
+                <Annotation Term="Common.SideEffects">
+                    <Record Type="Common.SideEffectsType">
+                        <PropertyValue Property="TargetEntities">
+                            <Collection>
+                                <NavigationPropertyPath>/LogaliGroup.EntityContainer/Sales</NavigationPropertyPath>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="LogaliGroup.Products">
+                <Annotation Term="Common.SideEffects">
+                    <Record Type="Common.SideEffectsType">
+                        <PropertyValue Property="SourceProperties">
+                            <Collection>
+                                <PropertyPath>supplier_ID</PropertyPath>
+                            </Collection>
+                        </PropertyValue>
+                        <PropertyValue Property="TargetEntities">
+                            <Collection>
+                                <NavigationPropertyPath>supplier</NavigationPropertyPath>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.HeaderInfo">
+                    <Record Type="UI.HeaderInfoType">
+                        <PropertyValue Property="TypeName" String="Product"/>
+                        <PropertyValue Property="TypeNamePlural" String="Products"/>
+                        <PropertyValue Property="Title">
+                            <Record Type="UI.DataField">
+                                <PropertyValue Property="Value" Path="productName"/>
+                            </Record>
+                        </PropertyValue>
+                        <PropertyValue Property="Description">
+                            <Record Type="UI.DataField">
+                                <PropertyValue Property="Value" Path="product"/>
+                            </Record>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.SelectionFields">
+                    <Collection>
+                        <PropertyPath>product</PropertyPath>
+                        <PropertyPath>supplier_ID</PropertyPath>
+                        <PropertyPath>category_ID</PropertyPath>
+                        <PropertyPath>subCategory_ID</PropertyPath>
+                        <PropertyPath>statu_code</PropertyPath>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="UI.LineItem">
+                    <Collection>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="image"/>
+                            <Annotation Term="HTML5.CssDefaults">
+                                <Record Type="HTML5.CssDefaultsType">
+                                    <PropertyValue Property="width" String="10rem"/>
+                                </Record>
+                            </Annotation>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="product"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="productName"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="category_ID"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="subCategory_ID"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="statu_code"/>
+                            <PropertyValue Property="Criticality" Path="statu/criticality"/>
+                            <Annotation Term="HTML5.CssDefaults">
+                                <Record Type="HTML5.CssDefaultsType">
+                                    <PropertyValue Property="width" String="10rem"/>
+                                </Record>
+                            </Annotation>
+                        </Record>
+                        <Record Type="UI.DataFieldForAnnotation">
+                            <PropertyValue Property="Target" AnnotationPath="@UI.DataPoint#Variant1"/>
+                            <Annotation Term="HTML5.CssDefaults">
+                                <Record Type="HTML5.CssDefaultsType">
+                                    <PropertyValue Property="width" String="10rem"/>
+                                </Record>
+                            </Annotation>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="price"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="UI.DataPoint" Qualifier="Variant1">
+                    <Record Type="UI.DataPointType">
+                        <PropertyValue Property="Visualization" EnumMember="UI.VisualizationType/Rating"/>
+                        <PropertyValue Property="Value" Path="rating"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.FieldGroup" Qualifier="Image">
+                    <Record Type="UI.FieldGroupType">
+                        <PropertyValue Property="Data">
+                            <Collection>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="image"/>
+                                    <PropertyValue Property="Label" String=""/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.FieldGroup" Qualifier="SupplierAndCategory">
+                    <Record Type="UI.FieldGroupType">
+                        <PropertyValue Property="Data">
+                            <Collection>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="supplier_ID"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="category_ID"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="subCategory_ID"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.FieldGroup" Qualifier="ProductDescription">
+                    <Record Type="UI.FieldGroupType">
+                        <PropertyValue Property="Data">
+                            <Collection>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="description"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.FieldGroup" Qualifier="Statu">
+                    <Record Type="UI.FieldGroupType">
+                        <PropertyValue Property="Data">
+                            <Collection>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="statu_code"/>
+                                    <PropertyValue Property="Criticality" Path="statu/criticality"/>
+                                    <PropertyValue Property="Label" String=""/>
+                                    <Annotation Term="Common.FieldControl">
+                                        <If>
+                                            <Eq>
+                                                <Path>IsActiveEntity</Path>
+                                                <Bool>false</Bool>
+                                            </Eq>
+                                            <Int>1</Int>
+                                            <Int>3</Int>
+                                        </If>
+                                    </Annotation>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.FieldGroup" Qualifier="Price">
+                    <Record Type="UI.FieldGroupType">
+                        <PropertyValue Property="Data">
+                            <Collection>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="price"/>
+                                    <PropertyValue Property="Label" String=""/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.HeaderFacets">
+                    <Collection>
+                        <Record Type="UI.ReferenceFacet">
+                            <PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#Image"/>
+                            <PropertyValue Property="ID" String="Image"/>
+                        </Record>
+                        <Record Type="UI.ReferenceFacet">
+                            <PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#SupplierAndCategory"/>
+                            <PropertyValue Property="ID" String="SupplierAndCategory"/>
+                        </Record>
+                        <Record Type="UI.ReferenceFacet">
+                            <PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#ProductDescription"/>
+                            <PropertyValue Property="ID" String="ProductDescription"/>
+                            <PropertyValue Property="Label" String="Product Description"/>
+                        </Record>
+                        <Record Type="UI.ReferenceFacet">
+                            <PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#Statu"/>
+                            <PropertyValue Property="ID" String="ProductStatu"/>
+                            <PropertyValue Property="Label" String="Availability"/>
+                        </Record>
+                        <Record Type="UI.ReferenceFacet">
+                            <PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#Price"/>
+                            <PropertyValue Property="ID" String="Price"/>
+                            <PropertyValue Property="Label" String="Price"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="UI.Facets">
+                    <Collection>
+                        <Record Type="UI.CollectionFacet">
+                            <PropertyValue Property="Facets">
+                                <Collection>
+                                    <Record Type="UI.ReferenceFacet">
+                                        <PropertyValue Property="Target" AnnotationPath="supplier/@UI.FieldGroup#Supplier"/>
+                                        <PropertyValue Property="Label" String="Information"/>
+                                        <PropertyValue Property="ID" String="supplier"/>
+                                    </Record>
+                                    <Record Type="UI.ReferenceFacet">
+                                        <PropertyValue Property="Target" AnnotationPath="supplier/contact/@UI.FieldGroup#Contact"/>
+                                        <PropertyValue Property="Label" String="Contact Person"/>
+                                        <PropertyValue Property="ID" String="contact"/>
+                                    </Record>
+                                </Collection>
+                            </PropertyValue>
+                            <PropertyValue Property="Label" String="Supplier Information"/>
+                        </Record>
+                        <Record Type="UI.ReferenceFacet">
+                            <PropertyValue Property="Target" AnnotationPath="detail/@UI.FieldGroup"/>
+                            <PropertyValue Property="Label" String="Product Information"/>
+                            <PropertyValue Property="ID" String="detail"/>
+                        </Record>
+                        <Record Type="UI.ReferenceFacet">
+                            <PropertyValue Property="Target" AnnotationPath="toReviews/@UI.LineItem"/>
+                            <PropertyValue Property="Label" String="Reviews"/>
+                            <PropertyValue Property="ID" String="toReviews"/>
+                        </Record>
+                        <Record Type="UI.ReferenceFacet">
+                            <PropertyValue Property="Target" AnnotationPath="toInventories/@UI.LineItem"/>
+                            <PropertyValue Property="Label" String="Inventory Information"/>
+                            <PropertyValue Property="ID" String="toInventories"/>
+                        </Record>
+                        <Record Type="UI.ReferenceFacet">
+                            <PropertyValue Property="Target" AnnotationPath="toSales/@UI.Chart"/>
+                            <PropertyValue Property="Label" String="Sales"/>
+                            <PropertyValue Property="ID" String="toSales"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="LogaliGroup.EntityContainer/Products">
+                <Annotation Term="Common.SideEffects">
+                    <Record Type="Common.SideEffectsType">
+                        <PropertyValue Property="SourceProperties">
+                            <Collection>
+                                <PropertyPath>supplier_ID</PropertyPath>
+                            </Collection>
+                        </PropertyValue>
+                        <PropertyValue Property="TargetEntities">
+                            <Collection>
+                                <NavigationPropertyPath>supplier</NavigationPropertyPath>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Common.DraftRoot">
+                    <Record Type="Common.DraftRootType">
+                        <PropertyValue Property="ActivationAction" String="LogaliGroup.draftActivate"/>
+                        <PropertyValue Property="EditAction" String="LogaliGroup.draftEdit"/>
+                        <PropertyValue Property="PreparationAction" String="LogaliGroup.draftPrepare"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.FilterRestrictions">
+                    <Record Type="Capabilities.FilterRestrictionsType">
+                        <PropertyValue Property="FilterExpressionRestrictions">
+                            <Collection>
+                                <Record Type="Capabilities.FilterExpressionRestrictionType">
+                                    <PropertyValue Property="Property" PropertyPath="product"/>
+                                    <PropertyValue Property="AllowedExpressions" String="SearchExpression"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="LogaliGroup.Products/ID">
+                <Annotation Term="Core.ComputedDefaultValue" Bool="true"/>
+            </Annotations>
+            <Annotations Target="LogaliGroup.Products/createdAt">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="UI.ExcludeFromNavigationContext" Bool="true"/>
+                <Annotation Term="Core.Immutable" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Common.Label" String="Created On"/>
+            </Annotations>
+            <Annotations Target="LogaliGroup.Products/createdBy">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="UI.ExcludeFromNavigationContext" Bool="true"/>
+                <Annotation Term="Core.Immutable" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Core.Description" String="User's unique ID"/>
+                <Annotation Term="Common.Label" String="Created By"/>
+            </Annotations>
+            <Annotations Target="LogaliGroup.Products/modifiedAt">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="UI.ExcludeFromNavigationContext" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Common.Label" String="Changed On"/>
+            </Annotations>
+            <Annotations Target="LogaliGroup.Products/modifiedBy">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="UI.ExcludeFromNavigationContext" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Core.Description" String="User's unique ID"/>
+                <Annotation Term="Common.Label" String="Changed By"/>
+            </Annotations>
+            <Annotations Target="LogaliGroup.Products/product">
+                <Annotation Term="Common.Label" String="Product"/>
+            </Annotations>
+            <Annotations Target="LogaliGroup.Products/productName">
+                <Annotation Term="Common.Label" String="Product Name"/>
+            </Annotations>
+            <Annotations Target="LogaliGroup.Products/image">
+                <Annotation Term="Core.MediaType" Path="imageType"/>
+                <Annotation Term="UI.IsImage" Bool="true"/>
+                <Annotation Term="Common.Label" String="Image"/>
+            </Annotations>
+            <Annotations Target="LogaliGroup.Products/imageType">
+                <Annotation Term="Core.IsMediaType" Bool="true"/>
+            </Annotations>
+            <Annotations Target="LogaliGroup.Products/description">
+                <Annotation Term="UI.MultiLineText" Bool="true"/>
+                <Annotation Term="Common.Label" String="Description"/>
+            </Annotations>
+            <Annotations Target="LogaliGroup.Products/category">
+                <Annotation Term="Common.Label" String="Category"/>
+            </Annotations>
+            <Annotations Target="LogaliGroup.Products/category_ID">
+                <Annotation Term="Common.Text" Path="category/category">
+                    <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextOnly"/>
+                </Annotation>
+                <Annotation Term="Common.ValueList">
+                    <Record Type="Common.ValueListType">
+                        <PropertyValue Property="CollectionPath" String="VH_Categories"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="category_ID"/>
+                                    <PropertyValue Property="ValueListProperty" String="ID"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Common.Label" String="Category"/>
+            </Annotations>
+            <Annotations Target="LogaliGroup.Products/subCategory">
+                <Annotation Term="Common.Label" String="Sub Category"/>
+            </Annotations>
+            <Annotations Target="LogaliGroup.Products/subCategory_ID">
+                <Annotation Term="Common.Text" Path="subCategory/subCategory">
+                    <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextOnly"/>
+                </Annotation>
+                <Annotation Term="Common.ValueList">
+                    <Record Type="Common.ValueListType">
+                        <PropertyValue Property="CollectionPath" String="VH_SubCategories"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterIn">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="category_ID"/>
+                                    <PropertyValue Property="ValueListProperty" String="category_ID"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="subCategory_ID"/>
+                                    <PropertyValue Property="ValueListProperty" String="ID"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Common.Label" String="Sub Category"/>
+            </Annotations>
+            <Annotations Target="LogaliGroup.Products/statu">
+                <Annotation Term="Common.Label" String="Statu"/>
+            </Annotations>
+            <Annotations Target="LogaliGroup.Products/statu_code">
+                <Annotation Term="Common.Text" Path="statu/name">
+                    <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextOnly"/>
+                </Annotation>
+                <Annotation Term="Common.Label" String="Statu"/>
+                <Annotation Term="Common.ValueList">
+                    <Record Type="Common.ValueListType">
+                        <PropertyValue Property="Label" String="Statu"/>
+                        <PropertyValue Property="CollectionPath" String="Status"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="statu_code"/>
+                                    <PropertyValue Property="ValueListProperty" String="code"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="name"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="LogaliGroup.Products/price">
+                <Annotation Term="Measures.ISOCurrency" Path="currency_code"/>
+                <Annotation Term="Common.Label" String="Price"/>
+            </Annotations>
+            <Annotations Target="LogaliGroup.Products/rating">
+                <Annotation Term="Common.Label" String="Rating"/>
+            </Annotations>
+            <Annotations Target="LogaliGroup.Products/currency_code">
+                <Annotation Term="Common.IsCurrency" Bool="true"/>
+                <Annotation Term="Common.ValueList">
+                    <Record Type="Common.ValueListType">
+                        <PropertyValue Property="Label" String="Currencies"/>
+                        <PropertyValue Property="CollectionPath" String="Currencies"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="currency_code"/>
+                                    <PropertyValue Property="ValueListProperty" String="code"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="name"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="LogaliGroup.Products/supplier">
+                <Annotation Term="Common.Label" String="Supplier"/>
+            </Annotations>
+            <Annotations Target="LogaliGroup.Products/supplier_ID">
+                <Annotation Term="Common.Text" Path="supplier/supplierName">
+                    <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextOnly"/>
+                </Annotation>
+                <Annotation Term="Common.ValueList">
+                    <Record Type="Common.ValueListType">
+                        <PropertyValue Property="CollectionPath" String="Suppliers"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="supplier_ID"/>
+                                    <PropertyValue Property="ValueListProperty" String="ID"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Common.Label" String="Supplier"/>
+            </Annotations>
+            <Annotations Target="LogaliGroup.Products/IsActiveEntity">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="LogaliGroup.Products/HasActiveEntity">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="LogaliGroup.Products/HasDraftEntity">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="LogaliGroup.Products/DraftAdministrativeData">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="LogaliGroup.ProductDetails">
+                <Annotation Term="UI.FieldGroup">
+                    <Record Type="UI.FieldGroupType">
+                        <PropertyValue Property="Data">
+                            <Collection>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="baseUnit"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="width"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="height"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="depth"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="weight"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                        <PropertyValue Property="Label" String="Technical Data"/>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="LogaliGroup.EntityContainer/ProductDetails">
+                <Annotation Term="Common.DraftNode">
+                    <Record Type="Common.DraftNodeType">
+                        <PropertyValue Property="PreparationAction" String="LogaliGroup.draftPrepare"/>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="LogaliGroup.ProductDetails/ID">
+                <Annotation Term="Core.ComputedDefaultValue" Bool="true"/>
+            </Annotations>
+            <Annotations Target="LogaliGroup.ProductDetails/baseUnit">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/ReadOnly"/>
+                <Annotation Term="Common.Label" String="Base Unit"/>
+            </Annotations>
+            <Annotations Target="LogaliGroup.ProductDetails/width">
+                <Annotation Term="Measures.Unit" Path="unitVolume"/>
+                <Annotation Term="Common.Label" String="Width"/>
+            </Annotations>
+            <Annotations Target="LogaliGroup.ProductDetails/height">
+                <Annotation Term="Measures.Unit" Path="unitVolume"/>
+                <Annotation Term="Common.Label" String="Height"/>
+            </Annotations>
+            <Annotations Target="LogaliGroup.ProductDetails/depth">
+                <Annotation Term="Measures.Unit" Path="unitVolume"/>
+                <Annotation Term="Common.Label" String="Depth"/>
+            </Annotations>
+            <Annotations Target="LogaliGroup.ProductDetails/weight">
+                <Annotation Term="Measures.Unit" Path="unitWeight"/>
+                <Annotation Term="Common.Label" String="Weight"/>
+            </Annotations>
+            <Annotations Target="LogaliGroup.ProductDetails/unitVolume">
+                <Annotation Term="Common.IsUnit" Bool="true"/>
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/ReadOnly"/>
+            </Annotations>
+            <Annotations Target="LogaliGroup.ProductDetails/unitWeight">
+                <Annotation Term="Common.IsUnit" Bool="true"/>
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/ReadOnly"/>
+            </Annotations>
+            <Annotations Target="LogaliGroup.ProductDetails/IsActiveEntity">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="LogaliGroup.ProductDetails/HasActiveEntity">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="LogaliGroup.ProductDetails/HasDraftEntity">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="LogaliGroup.ProductDetails/DraftAdministrativeData">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="LogaliGroup.Suppliers">
+                <Annotation Term="UI.FieldGroup" Qualifier="Supplier">
+                    <Record Type="UI.FieldGroupType">
+                        <PropertyValue Property="Data">
+                            <Collection>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="supplier"/>
+                                    <Annotation Term="Common.FieldControl">
+                                        <If>
+                                            <Eq>
+                                                <Path>/LogaliGroup.EntityContainer/Products/IsActiveEntity</Path>
+                                                <Bool>false</Bool>
+                                            </Eq>
+                                            <Int>1</Int>
+                                            <Int>3</Int>
+                                        </If>
+                                    </Annotation>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="supplierName"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="webAddress"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="LogaliGroup.Suppliers/ID">
+                <Annotation Term="Common.Text" Path="supplierName">
+                    <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextOnly"/>
+                </Annotation>
+                <Annotation Term="Common.Label" String="Suppliers"/>
+                <Annotation Term="Core.ComputedDefaultValue" Bool="true"/>
+            </Annotations>
+            <Annotations Target="LogaliGroup.Suppliers/supplier">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/ReadOnly"/>
+                <Annotation Term="Common.Label" String="Supplier"/>
+            </Annotations>
+            <Annotations Target="LogaliGroup.Suppliers/supplierName">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/ReadOnly"/>
+                <Annotation Term="Common.Label" String="Supplier Name"/>
+            </Annotations>
+            <Annotations Target="LogaliGroup.Suppliers/webAddress">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/ReadOnly"/>
+                <Annotation Term="Common.Label" String="Web Address"/>
+            </Annotations>
+            <Annotations Target="LogaliGroup.Contacts">
+                <Annotation Term="UI.FieldGroup" Qualifier="Contact">
+                    <Record Type="UI.FieldGroupType">
+                        <PropertyValue Property="Data">
+                            <Collection>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="fullName"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="email"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="phoneNumber"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="LogaliGroup.Contacts/ID">
+                <Annotation Term="Core.ComputedDefaultValue" Bool="true"/>
+            </Annotations>
+            <Annotations Target="LogaliGroup.Contacts/fullName">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/ReadOnly"/>
+                <Annotation Term="Common.Label" String="Full Name"/>
+            </Annotations>
+            <Annotations Target="LogaliGroup.Contacts/email">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/ReadOnly"/>
+                <Annotation Term="Common.Label" String="Email"/>
+            </Annotations>
+            <Annotations Target="LogaliGroup.Contacts/phoneNumber">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/ReadOnly"/>
+                <Annotation Term="Common.Label" String="Phone Number"/>
+            </Annotations>
+            <Annotations Target="LogaliGroup.Reviews">
+                <Annotation Term="UI.HeaderInfo">
+                    <Record Type="UI.HeaderInfoType">
+                        <PropertyValue Property="TypeName" String="Review"/>
+                        <PropertyValue Property="TypeNamePlural" String="Reviews"/>
+                        <PropertyValue Property="Title">
+                            <Record Type="UI.DataField">
+                                <PropertyValue Property="Value" Path="product/productName"/>
+                            </Record>
+                        </PropertyValue>
+                        <PropertyValue Property="Description">
+                            <Record Type="UI.DataField">
+                                <PropertyValue Property="Value" Path="product/product"/>
+                            </Record>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.LineItem">
+                    <Collection>
+                        <Record Type="UI.DataFieldForAnnotation">
+                            <PropertyValue Property="Target" AnnotationPath="@UI.DataPoint"/>
+                            <PropertyValue Property="Label" String="Rating"/>
+                            <Annotation Term="HTML5.CssDefaults">
+                                <Record Type="HTML5.CssDefaultsType">
+                                    <PropertyValue Property="width" String="10rem"/>
+                                </Record>
+                            </Annotation>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="date"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="user"/>
+                            <PropertyValue Property="Label" String="User"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="reviewText"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="UI.DataPoint">
+                    <Record Type="UI.DataPointType">
+                        <PropertyValue Property="Value" Path="rating"/>
+                        <PropertyValue Property="Visualization" EnumMember="UI.VisualizationType/Rating"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.FieldGroup" Qualifier="Reviews">
+                    <Record Type="UI.FieldGroupType">
+                        <PropertyValue Property="Data">
+                            <Collection>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="rating"/>
+                                    <PropertyValue Property="Label" String="Rating"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="date"/>
+                                    <PropertyValue Property="Label" String="Date"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="user"/>
+                                    <PropertyValue Property="Label" String="User"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="reviewText"/>
+                                    <PropertyValue Property="Label" String="Review Text"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.Facets">
+                    <Collection>
+                        <Record Type="UI.ReferenceFacet">
+                            <PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#Reviews"/>
+                            <PropertyValue Property="Label" String="Reviews"/>
+                            <PropertyValue Property="ID" String="Reviews"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="LogaliGroup.Reviews/ID">
+                <Annotation Term="Core.ComputedDefaultValue" Bool="true"/>
+            </Annotations>
+            <Annotations Target="LogaliGroup.Reviews/rating">
+                <Annotation Term="Common.Label" String="Rating"/>
+            </Annotations>
+            <Annotations Target="LogaliGroup.Reviews/date">
+                <Annotation Term="Common.Label" String="Date"/>
+            </Annotations>
+            <Annotations Target="LogaliGroup.Reviews/user">
+                <Annotation Term="Common.Label" String="User"/>
+            </Annotations>
+            <Annotations Target="LogaliGroup.Reviews/reviewText">
+                <Annotation Term="Common.Label" String="Review Text"/>
+            </Annotations>
+            <Annotations Target="LogaliGroup.Inventories">
+                <Annotation Term="Common.SemanticKey">
+                    <Collection>
+                        <PropertyPath>stockNumber</PropertyPath>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="UI.HeaderInfo">
+                    <Record Type="UI.HeaderInfoType">
+                        <PropertyValue Property="TypeName" String="Inventory"/>
+                        <PropertyValue Property="TypeNamePlural" String="Inventories"/>
+                        <PropertyValue Property="Title">
+                            <Record Type="UI.DataField">
+                                <PropertyValue Property="Value" Path="product/productName"/>
+                            </Record>
+                        </PropertyValue>
+                        <PropertyValue Property="Description">
+                            <Record Type="UI.DataField">
+                                <PropertyValue Property="Value" Path="product/product"/>
+                            </Record>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.LineItem">
+                    <Collection>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="stockNumber"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="department_ID"/>
+                        </Record>
+                        <Record Type="UI.DataFieldForAnnotation">
+                            <PropertyValue Property="Target" AnnotationPath="@UI.Chart#Bullet"/>
+                            <Annotation Term="HTML5.CssDefaults">
+                                <Record Type="HTML5.CssDefaultsType">
+                                    <PropertyValue Property="width" String="10rem"/>
+                                </Record>
+                            </Annotation>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="quantity"/>
+                        </Record>
+                        <Record Type="UI.DataFieldForAction">
+                            <PropertyValue Property="Action" String="LogaliGroup.setStock"/>
+                            <PropertyValue Property="Label" String="Set Stock"/>
+                            <PropertyValue Property="Inline" Bool="true"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="UI.DataPoint">
+                    <Record Type="UI.DataPointType">
+                        <PropertyValue Property="Value" Path="quantity"/>
+                        <PropertyValue Property="MinimumValue" Path="min"/>
+                        <PropertyValue Property="MaximumValue" Path="max"/>
+                        <PropertyValue Property="CriticalityCalculation">
+                            <Record Type="UI.CriticalityCalculationType">
+                                <PropertyValue Property="ImprovementDirection" EnumMember="UI.ImprovementDirectionType/Maximize"/>
+                                <PropertyValue Property="ToleranceRangeLowValue" Int="200"/>
+                                <PropertyValue Property="DeviationRangeLowValue" Int="100"/>
+                            </Record>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.Chart" Qualifier="Bullet">
+                    <Record Type="UI.ChartDefinitionType">
+                        <PropertyValue Property="ChartType" EnumMember="UI.ChartType/Bullet"/>
+                        <PropertyValue Property="Measures">
+                            <Collection>
+                                <PropertyPath>quantity</PropertyPath>
+                            </Collection>
+                        </PropertyValue>
+                        <PropertyValue Property="MeasureAttributes">
+                            <Collection>
+                                <Record Type="UI.ChartMeasureAttributeType">
+                                    <PropertyValue Property="DataPoint" AnnotationPath="@UI.DataPoint"/>
+                                    <PropertyValue Property="Measure" PropertyPath="quantity"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.FieldGroup">
+                    <Record Type="UI.FieldGroupType">
+                        <PropertyValue Property="Data">
+                            <Collection>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="stockNumber"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="department_ID"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="min"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="max"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="target"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="quantity"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.Facets">
+                    <Collection>
+                        <Record Type="UI.ReferenceFacet">
+                            <PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup"/>
+                            <PropertyValue Property="Label" String="Inventory Information"/>
+                            <PropertyValue Property="ID" String="InventoryInformation"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="LogaliGroup.EntityContainer/Inventories">
+                <Annotation Term="Common.DraftNode">
+                    <Record Type="Common.DraftNodeType">
+                        <PropertyValue Property="PreparationAction" String="LogaliGroup.draftPrepare"/>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="LogaliGroup.Inventories/ID">
+                <Annotation Term="Core.ComputedDefaultValue" Bool="true"/>
+            </Annotations>
+            <Annotations Target="LogaliGroup.Inventories/stockNumber">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/ReadOnly"/>
+                <Annotation Term="Common.Label" String="Stock Number"/>
+            </Annotations>
+            <Annotations Target="LogaliGroup.Inventories/department">
+                <Annotation Term="Common.Label" String="Department"/>
+            </Annotations>
+            <Annotations Target="LogaliGroup.Inventories/department_ID">
+                <Annotation Term="Common.Text" Path="department/department">
+                    <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextOnly"/>
+                </Annotation>
+                <Annotation Term="Common.ValueList">
+                    <Record Type="Common.ValueListType">
+                        <PropertyValue Property="CollectionPath" String="VH_Departments"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="department_ID"/>
+                                    <PropertyValue Property="ValueListProperty" String="ID"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Common.Label" String="Department"/>
+            </Annotations>
+            <Annotations Target="LogaliGroup.Inventories/min">
+                <Annotation Term="Common.Label" String="Minimun"/>
+            </Annotations>
+            <Annotations Target="LogaliGroup.Inventories/max">
+                <Annotation Term="Common.Label" String="Maximun"/>
+            </Annotations>
+            <Annotations Target="LogaliGroup.Inventories/target">
+                <Annotation Term="Common.Label" String="Target"/>
+            </Annotations>
+            <Annotations Target="LogaliGroup.Inventories/quantity">
+                <Annotation Term="Measures.Unit" Path="baseUnit"/>
+                <Annotation Term="Common.Label" String="Quantity"/>
+            </Annotations>
+            <Annotations Target="LogaliGroup.Inventories/baseUnit">
+                <Annotation Term="Common.IsUnit" Bool="true"/>
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/ReadOnly"/>
+                <Annotation Term="Common.Label" String="Base Unit"/>
+            </Annotations>
+            <Annotations Target="LogaliGroup.Inventories/IsActiveEntity">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="LogaliGroup.Inventories/HasActiveEntity">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="LogaliGroup.Inventories/HasDraftEntity">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="LogaliGroup.Inventories/DraftAdministrativeData">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="LogaliGroup.setStock(LogaliGroup.Inventories)">
+                <Annotation Term="Core.OperationAvailable">
+                    <If>
+                        <Eq>
+                            <Path>in/product/IsActiveEntity</Path>
+                            <Bool>false</Bool>
+                        </Eq>
+                        <Bool>false</Bool>
+                        <Bool>true</Bool>
+                    </If>
+                </Annotation>
+                <Annotation Term="Common.SideEffects">
+                    <Record Type="Common.SideEffectsType">
+                        <PropertyValue Property="TargetProperties">
+                            <Collection>
+                                <String>in/quantity</String>
+                            </Collection>
+                        </PropertyValue>
+                        <PropertyValue Property="TargetEntities">
+                            <Collection>
+                                <NavigationPropertyPath>in/product</NavigationPropertyPath>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="LogaliGroup.setStock(LogaliGroup.Inventories)/option">
+                <Annotation Term="Common.Text" Path="option">
+                    <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextOnly"/>
+                </Annotation>
+                <Annotation Term="Common.ValueList">
+                    <Record Type="Common.ValueListType">
+                        <PropertyValue Property="CollectionPath" String="VH_Options"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="option"/>
+                                    <PropertyValue Property="ValueListProperty" String="code"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="name"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Common.Label" String="Option"/>
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+            </Annotations>
+            <Annotations Target="LogaliGroup.setStock(LogaliGroup.Inventories)/amount">
+                <Annotation Term="Common.Label" String="Amount"/>
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+            </Annotations>
+            <Annotations Target="LogaliGroup.Sales">
+                <Annotation Term="Analytics.AggregatedProperty" Qualifier="sum">
+                    <Record Type="Analytics.AggregatedPropertyType">
+                        <PropertyValue Property="Name" String="Sales"/>
+                        <PropertyValue Property="AggregationMethod" String="sum"/>
+                        <PropertyValue Property="AggregatableProperty" PropertyPath="quantitySales"/>
+                        <Annotation Term="Common.Label" String="Sales"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Aggregation.ApplySupported">
+                    <Record Type="Aggregation.ApplySupportedType">
+                        <PropertyValue Property="Transformations">
+                            <Collection>
+                                <String>aggregate</String>
+                                <String>ancestors</String>
+                                <String>identity</String>
+                                <String>traverse</String>
+                                <String>outerjoin</String>
+                                <String>nest</String>
+                                <String>join</String>
+                                <String>descendants</String>
+                                <String>compute</String>
+                                <String>bottomsum</String>
+                                <String>bottompercent</String>
+                                <String>bottomcount</String>
+                                <String>topcount</String>
+                                <String>topsum</String>
+                                <String>toppercent</String>
+                                <String>topcount</String>
+                                <String>concat</String>
+                                <String>groupby</String>
+                                <String>filter</String>
+                                <String>top</String>
+                                <String>skip</String>
+                                <String>orderby</String>
+                                <String>search</String>
+                            </Collection>
+                        </PropertyValue>
+                        <PropertyValue Property="CustomAggregationMethods">
+                            <Collection>
+                                <String>Custom.concat</String>
+                            </Collection>
+                        </PropertyValue>
+                        <PropertyValue Property="Rollup" EnumMember="Aggregation.RollupType/None"/>
+                        <PropertyValue Property="PropertyRestrictions" Bool="true"/>
+                        <PropertyValue Property="GroupableProperties">
+                            <Collection>
+                                <PropertyPath>year</PropertyPath>
+                                <PropertyPath>month</PropertyPath>
+                            </Collection>
+                        </PropertyValue>
+                        <PropertyValue Property="AggregatableProperties">
+                            <Collection>
+                                <Record Type="Aggregation.AggregatablePropertyType">
+                                    <PropertyValue Property="Property" PropertyPath="quantitySales"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.Chart">
+                    <Record Type="UI.ChartDefinitionType">
+                        <PropertyValue Property="ChartType" EnumMember="UI.ChartType/Line"/>
+                        <PropertyValue Property="Title" String="Sales"/>
+                        <PropertyValue Property="Description" String="Sales"/>
+                        <PropertyValue Property="DynamicMeasures">
+                            <Collection>
+                                <AnnotationPath>@Analytics.AggregatedProperty#sum</AnnotationPath>
+                            </Collection>
+                        </PropertyValue>
+                        <PropertyValue Property="Dimensions">
+                            <Collection>
+                                <PropertyPath>year</PropertyPath>
+                                <PropertyPath>month</PropertyPath>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.HeaderInfo">
+                    <Record Type="UI.HeaderInfoType">
+                        <PropertyValue Property="TypeName" String="Sale"/>
+                        <PropertyValue Property="TypeNamePlural" String="Sales"/>
+                        <PropertyValue Property="Title">
+                            <Record Type="UI.DataField">
+                                <PropertyValue Property="Value" Path="product/productName"/>
+                            </Record>
+                        </PropertyValue>
+                        <PropertyValue Property="Description">
+                            <Record Type="UI.DataField">
+                                <PropertyValue Property="Value" Path="product/product"/>
+                            </Record>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.LineItem">
+                    <Collection>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="year"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="month"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="quantitySales"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="UI.FieldGroup">
+                    <Record Type="UI.FieldGroupType">
+                        <PropertyValue Property="Data">
+                            <Collection>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="year"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="month"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="monthCode"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="quantitySales"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.Facets">
+                    <Collection>
+                        <Record Type="UI.ReferenceFacet">
+                            <PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup"/>
+                            <PropertyValue Property="Label" String="Sales"/>
+                            <PropertyValue Property="ID" String="sales"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+
+            <Annotations Target="LogaliGroup.EntityContainer/Sales">
+                <Annotation Term="Aggregation.ApplySupported">
+                    <Record Type="Aggregation.ApplySupportedType">
+                        <PropertyValue Property="Transformations">
+                            <Collection>
+                                <String>aggregate</String>
+                                <String>ancestors</String>
+                                <String>identity</String>
+                                <String>traverse</String>
+                                <String>outerjoin</String>
+                                <String>nest</String>
+                                <String>join</String>
+                                <String>descendants</String>
+                                <String>compute</String>
+                                <String>bottomsum</String>
+                                <String>bottompercent</String>
+                                <String>bottomcount</String>
+                                <String>topcount</String>
+                                <String>topsum</String>
+                                <String>toppercent</String>
+                                <String>topcount</String>
+                                <String>concat</String>
+                                <String>groupby</String>
+                                <String>filter</String>
+                                <String>top</String>
+                                <String>skip</String>
+                                <String>orderby</String>
+                                <String>search</String>
+                            </Collection>
+                        </PropertyValue>
+                        <PropertyValue Property="CustomAggregationMethods">
+                            <Collection>
+                                <String>Custom.concat</String>
+                            </Collection>
+                        </PropertyValue>
+                        <PropertyValue Property="Rollup" EnumMember="Aggregation.RollupType/None"/>
+                        <PropertyValue Property="PropertyRestrictions" Bool="true"/>
+                        <PropertyValue Property="GroupableProperties">
+                            <Collection>
+                                <PropertyPath>year</PropertyPath>
+                                <PropertyPath>month</PropertyPath>
+                            </Collection>
+                        </PropertyValue>
+                        <PropertyValue Property="AggregatableProperties">
+                            <Collection>
+                                <Record Type="Aggregation.AggregatablePropertyType">
+                                    <PropertyValue Property="Property" PropertyPath="quantitySales"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Common.DraftNode">
+                    <Record Type="Common.DraftNodeType">
+                        <PropertyValue Property="PreparationAction" String="LogaliGroup.draftPrepare"/>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="LogaliGroup.Sales/ID">
+                <Annotation Term="Core.ComputedDefaultValue" Bool="true"/>
+            </Annotations>
+            <Annotations Target="LogaliGroup.Sales/monthCode">
+                <Annotation Term="Common.IsCalendarMonth" Bool="true"/>
+                <Annotation Term="Common.Label" String="Month Code"/>
+            </Annotations>
+            <Annotations Target="LogaliGroup.Sales/month">
+                <Annotation Term="Common.IsCalendarMonth" Bool="true"/>
+                <Annotation Term="Common.Label" String="Month"/>
+                <Annotation Term="Analytics.Dimension" Bool="true"/>
+            </Annotations>
+            <Annotations Target="LogaliGroup.Sales/year">
+                <Annotation Term="Common.IsCalendarYear" Bool="true"/>
+                <Annotation Term="Common.Label" String="Year"/>
+            </Annotations>
+            <Annotations Target="LogaliGroup.Sales/quantitySales">
+                <Annotation Term="Common.Label" String="Quantity Sales"/>
+                <Annotation Term="Analytics.Measure" Bool="true"/>
+            </Annotations>
+            <Annotations Target="LogaliGroup.Sales/product">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="LogaliGroup.Sales/product_ID">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="LogaliGroup.Sales/IsActiveEntity">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="LogaliGroup.Sales/HasActiveEntity">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="LogaliGroup.Sales/HasDraftEntity">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="LogaliGroup.Sales/DraftAdministrativeData">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="LogaliGroup.Status">
+                <Annotation Term="UI.Identification">
+                    <Collection>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="name"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="LogaliGroup.Status/name">
+                <Annotation Term="Common.Label" String="Name"/>
+            </Annotations>
+            <Annotations Target="LogaliGroup.Status/descr">
+                <Annotation Term="Common.Label" String="Description"/>
+            </Annotations>
+            <Annotations Target="LogaliGroup.Status/code">
+                <Annotation Term="Common.Text" Path="name">
+                    <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextOnly"/>
+                </Annotation>
+                <Annotation Term="Common.Label" String="Statu Name"/>
+                <Annotation Term="Validation.AllowedValues">
+                    <Collection>
+                        <Record Type="Validation.AllowedValue">
+                            <Annotation Term="Core.SymbolicName" String="InStock"/>
+                            <PropertyValue Property="Value" String="In Stock"/>
+                        </Record>
+                        <Record Type="Validation.AllowedValue">
+                            <Annotation Term="Core.SymbolicName" String="OutOfStock"/>
+                            <PropertyValue Property="Value" String="Out of Stock"/>
+                        </Record>
+                        <Record Type="Validation.AllowedValue">
+                            <Annotation Term="Core.SymbolicName" String="LowAvailability"/>
+                            <PropertyValue Property="Value" String="Low Availability"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="LogaliGroup.VH_Categories/ID">
+                <Annotation Term="Common.Text" Path="category">
+                    <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextOnly"/>
+                </Annotation>
+                <Annotation Term="Common.Label" String="Categories"/>
+                <Annotation Term="Core.ComputedDefaultValue" Bool="true"/>
+            </Annotations>
+            <Annotations Target="LogaliGroup.VH_SubCategories/ID">
+                <Annotation Term="Common.Text" Path="subCategory">
+                    <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextOnly"/>
+                </Annotation>
+                <Annotation Term="Common.Label" String="Sub-Categories"/>
+                <Annotation Term="Core.ComputedDefaultValue" Bool="true"/>
+            </Annotations>
+            <Annotations Target="LogaliGroup.VH_Departments/ID">
+                <Annotation Term="Common.Text" Path="department">
+                    <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextOnly"/>
+                </Annotation>
+                <Annotation Term="Common.Label" String="Departments"/>
+                <Annotation Term="Core.ComputedDefaultValue" Bool="true"/>
+            </Annotations>
+            <Annotations Target="LogaliGroup.VH_Options">
+                <Annotation Term="UI.Identification">
+                    <Collection>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="name"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="LogaliGroup.VH_Options/name">
+                <Annotation Term="Common.Label" String="Name"/>
+            </Annotations>
+            <Annotations Target="LogaliGroup.VH_Options/descr">
+                <Annotation Term="Common.Label" String="Description"/>
+            </Annotations>
+            <Annotations Target="LogaliGroup.VH_Options/code">
+                <Annotation Term="Common.Text" Path="name">
+                    <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextOnly"/>
+                </Annotation>
+                <Annotation Term="Common.Label" String="Options"/>
+                <Annotation Term="Validation.AllowedValues">
+                    <Collection>
+                        <Record Type="Validation.AllowedValue">
+                            <Annotation Term="Core.SymbolicName" String="A"/>
+                            <PropertyValue Property="Value" String="Add"/>
+                        </Record>
+                        <Record Type="Validation.AllowedValue">
+                            <Annotation Term="Core.SymbolicName" String="D"/>
+                            <PropertyValue Property="Value" String="Discount"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="LogaliGroup.VH_Years/ID">
+                <Annotation Term="Core.ComputedDefaultValue" Bool="true"/>
+            </Annotations>
+            <Annotations Target="LogaliGroup.VH_Months">
+                <Annotation Term="UI.Identification">
+                    <Collection>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="name"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="LogaliGroup.VH_Months/name">
+                <Annotation Term="Common.Label" String="Name"/>
+            </Annotations>
+            <Annotations Target="LogaliGroup.VH_Months/descr">
+                <Annotation Term="Common.Label" String="Description"/>
+            </Annotations>
+            <Annotations Target="LogaliGroup.Currencies">
+                <Annotation Term="UI.Identification">
+                    <Collection>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="name"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="LogaliGroup.Currencies/name">
+                <Annotation Term="Common.Label" String="Name"/>
+            </Annotations>
+            <Annotations Target="LogaliGroup.Currencies/descr">
+                <Annotation Term="Common.Label" String="Description"/>
+            </Annotations>
+            <Annotations Target="LogaliGroup.Currencies/code">
+                <Annotation Term="Common.Text" Path="name"/>
+                <Annotation Term="Common.Label" String="Currency Code"/>
+            </Annotations>
+            <Annotations Target="LogaliGroup.Currencies/symbol">
+                <Annotation Term="Common.Label" String="Currency Symbol"/>
+            </Annotations>
+            <Annotations Target="LogaliGroup.Currencies/minorUnit">
+                <Annotation Term="Common.Label" String="Currency Minor Unit Fractions"/>
+            </Annotations>
+            <Annotations Target="LogaliGroup.DraftAdministrativeData">
+                <Annotation Term="Common.Label" String="Draft Administrative Data"/>
+            </Annotations>
+            <Annotations Target="LogaliGroup.DraftAdministrativeData/DraftUUID">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+                <Annotation Term="Common.Label" String="Draft (Technical ID)"/>
+                <Annotation Term="Core.ComputedDefaultValue" Bool="true"/>
+            </Annotations>
+            <Annotations Target="LogaliGroup.DraftAdministrativeData/CreationDateTime">
+                <Annotation Term="Common.Label" String="Draft Created On"/>
+            </Annotations>
+            <Annotations Target="LogaliGroup.DraftAdministrativeData/CreatedByUser">
+                <Annotation Term="Common.Label" String="Draft Created By"/>
+            </Annotations>
+            <Annotations Target="LogaliGroup.DraftAdministrativeData/DraftIsCreatedByMe">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+                <Annotation Term="Common.Label" String="Draft Created By Me"/>
+            </Annotations>
+            <Annotations Target="LogaliGroup.DraftAdministrativeData/LastChangeDateTime">
+                <Annotation Term="Common.Label" String="Draft Last Changed On"/>
+            </Annotations>
+            <Annotations Target="LogaliGroup.DraftAdministrativeData/LastChangedByUser">
+                <Annotation Term="Common.Label" String="Draft Last Changed By"/>
+            </Annotations>
+            <Annotations Target="LogaliGroup.DraftAdministrativeData/InProcessByUser">
+                <Annotation Term="Common.Label" String="Draft In Process By"/>
+            </Annotations>
+            <Annotations Target="LogaliGroup.DraftAdministrativeData/DraftIsProcessedByMe">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+                <Annotation Term="Common.Label" String="Draft In Process By Me"/>
+            </Annotations>
+            <Annotations Target="LogaliGroup.Status_texts/locale">
+                <Annotation Term="Common.Label" String="Language Code"/>
+            </Annotations>
+            <Annotations Target="LogaliGroup.Status_texts/name">
+                <Annotation Term="Common.Label" String="Name"/>
+            </Annotations>
+            <Annotations Target="LogaliGroup.Status_texts/descr">
+                <Annotation Term="Common.Label" String="Description"/>
+            </Annotations>
+            <Annotations Target="LogaliGroup.Status_texts/code">
+                <Annotation Term="Validation.AllowedValues">
+                    <Collection>
+                        <Record Type="Validation.AllowedValue">
+                            <Annotation Term="Core.SymbolicName" String="InStock"/>
+                            <PropertyValue Property="Value" String="In Stock"/>
+                        </Record>
+                        <Record Type="Validation.AllowedValue">
+                            <Annotation Term="Core.SymbolicName" String="OutOfStock"/>
+                            <PropertyValue Property="Value" String="Out of Stock"/>
+                        </Record>
+                        <Record Type="Validation.AllowedValue">
+                            <Annotation Term="Core.SymbolicName" String="LowAvailability"/>
+                            <PropertyValue Property="Value" String="Low Availability"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="LogaliGroup.VH_Options_texts/locale">
+                <Annotation Term="Common.Label" String="Language Code"/>
+            </Annotations>
+            <Annotations Target="LogaliGroup.VH_Options_texts/name">
+                <Annotation Term="Common.Label" String="Name"/>
+            </Annotations>
+            <Annotations Target="LogaliGroup.VH_Options_texts/descr">
+                <Annotation Term="Common.Label" String="Description"/>
+            </Annotations>
+            <Annotations Target="LogaliGroup.VH_Options_texts/code">
+                <Annotation Term="Validation.AllowedValues">
+                    <Collection>
+                        <Record Type="Validation.AllowedValue">
+                            <Annotation Term="Core.SymbolicName" String="A"/>
+                            <PropertyValue Property="Value" String="Add"/>
+                        </Record>
+                        <Record Type="Validation.AllowedValue">
+                            <Annotation Term="Core.SymbolicName" String="D"/>
+                            <PropertyValue Property="Value" String="Discount"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="LogaliGroup.VH_Months_texts/locale">
+                <Annotation Term="Common.Label" String="Language Code"/>
+            </Annotations>
+            <Annotations Target="LogaliGroup.VH_Months_texts/name">
+                <Annotation Term="Common.Label" String="Name"/>
+            </Annotations>
+            <Annotations Target="LogaliGroup.VH_Months_texts/descr">
+                <Annotation Term="Common.Label" String="Description"/>
+            </Annotations>
+            <Annotations Target="LogaliGroup.Currencies_texts/locale">
+                <Annotation Term="Common.Label" String="Language Code"/>
+            </Annotations>
+            <Annotations Target="LogaliGroup.Currencies_texts/name">
+                <Annotation Term="Common.Label" String="Name"/>
+            </Annotations>
+            <Annotations Target="LogaliGroup.Currencies_texts/descr">
+                <Annotation Term="Common.Label" String="Description"/>
+            </Annotations>
+            <Annotations Target="LogaliGroup.Currencies_texts/code">
+                <Annotation Term="Common.Text" Path="name"/>
+                <Annotation Term="Common.Label" String="Currency Code"/>
+            </Annotations>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>

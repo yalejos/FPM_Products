@@ -1,0 +1,76 @@
+<mvc:View controllerName="com.ya.products.ext.view.Details" xmlns="sap.m" xmlns:uxap="sap.uxap" xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:macros="sap.fe.macros">
+    <uxap:ObjectPageLayout id="ObjectPageLayout">
+        <uxap:headerTitle>
+            <uxap:ObjectPageDynamicHeaderTitle id="ObjectPageDynamicHeaderTitle">
+                <uxap:expandedHeading>
+                    <Title text="{productName}"/>
+                </uxap:expandedHeading>
+                <uxap:expandedContent>
+                    <Label text="{product}"/>
+                </uxap:expandedContent>
+                <uxap:snappedHeading>
+                    <Title text="{productName}"/>
+                </uxap:snappedHeading>
+                <uxap:snappedContent>
+                    <Label text="{product}"/>
+                </uxap:snappedContent>
+            </uxap:ObjectPageDynamicHeaderTitle>
+        </uxap:headerTitle>
+        <uxap:headerContent>
+            <FlexBox wrap="Wrap" fitContainer="true" alignItems="Stretch">
+                <VBox class="sapUiSmallMargin">
+                    <macros:Form id="fgImage" metaPath="@com.sap.vocabularies.UI.v1.FieldGroup#Image">
+                        <metaPath/>
+                    </macros:Form>
+                </VBox>
+                <HBox class="sapUiSmallMargin">
+                    <macros:Form id="fgSupplierAndCategory" metaPath="@com.sap.vocabularies.UI.v1.FieldGroup#SupplierAndCategory">
+                        <metaPath/>
+                    </macros:Form>
+                </HBox>
+                <VBox class="sapUiSmallMargin">
+                    <macros:Form id="fgProductDescription" metaPath="@com.sap.vocabularies.UI.v1.FieldGroup#ProductDescription">
+                        <metaPath/>
+                    </macros:Form>
+                    <macros:Form id="fgPrice" metaPath="@com.sap.vocabularies.UI.v1.FieldGroup#Price">
+                        <metaPath/>
+                    </macros:Form>
+                </VBox>
+                <VBox class="sapUiSmallMargin">
+                    <macros:Form id="fgStatus" metaPath="@com.sap.vocabularies.UI.v1.FieldGroup#Statu">
+                        <metaPath/>
+                    </macros:Form>
+                </VBox>
+            </FlexBox>
+        </uxap:headerContent>
+        <uxap:sections>
+            <uxap:ObjectPageSection id="generalInformation" title="{i18n>generalInformation}">
+                <uxap:subSections>
+                    <uxap:ObjectPageSubSection id="suppliersSection" title="Suppliers">
+                        <macros:Form id="fgSuppliers" metaPath="supplier/@UI.FieldGroup#Supplier">
+                            <metaPath/>
+                        </macros:Form>
+                    </uxap:ObjectPageSubSection>
+                    <uxap:ObjectPageSubSection id="productDetailsSection" title="Product Details">
+                        <macros:Form id="fgProductDetails" metaPath="detail/@UI.FieldGroup">
+                            <metaPath/>
+                        </macros:Form>
+                    </uxap:ObjectPageSubSection>
+                </uxap:subSections>
+            </uxap:ObjectPageSection>
+            <uxap:ObjectPageSection id="reviewsAndSales" title="{i18n>additionalInformation}">
+                <uxap:subSections>
+                    <uxap:ObjectPageSubSection id="reviewsSection" title="Reviews">
+                        <macros:Table id="fgReviews" metaPath="toReviews/@com.sap.vocabularies.UI.v1.LineItem"/>
+                    </uxap:ObjectPageSubSection>
+                    <uxap:ObjectPageSubSection id="inventoriesSection" title="Inventories">
+                        <macros:Table id="fgInventories" metaPath="toInventories/@com.sap.vocabularies.UI.v1.LineItem"/>
+                    </uxap:ObjectPageSubSection>
+                    <uxap:ObjectPageSubSection id="salesSection" title="Sales">
+                        <macros:Chart id="fgSales" contextPath="toSales" metaPath="@com.sap.vocabularies.UI.v1.Chart"/>
+                    </uxap:ObjectPageSubSection>
+                </uxap:subSections>
+            </uxap:ObjectPageSection>
+        </uxap:sections>
+    </uxap:ObjectPageLayout>
+</mvc:View>
