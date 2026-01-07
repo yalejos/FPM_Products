@@ -3,8 +3,8 @@
   "authenticationMethod": "route",
   "routes": [
     {
-      "source": "sap/opu/odata/sap/SEPMRA_SO_MAN2/",
-      "target": "sap/opu/odata/sap/SEPMRA_SO_MAN2/",
+      "source": "^/odata/(.*)$",
+      "target": "/odata/$1",
       "destination": "3034_FPM",
       "authenticationType": "none",
       "csrfProtection": false
